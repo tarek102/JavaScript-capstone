@@ -54,7 +54,7 @@ nav ul li {
 .popup .content {
   z-index: 2;
   width: 80%;
-  /* height: 50vh; */
+  min-height: 50vh;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
