@@ -18,6 +18,15 @@ export default class Api {
     });
     const res = await response.json();
     const invResArray = await res;
-    console.log(invResArray);
-  }
+    return invResArray;
+  };
+
+  postDataInvolvement = async (invUrl, likes, like_id) => {
+    await fetch(invUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json; charset=UTF-8' },
+      body: JSON.stringify({ likes , like_id}),
+    })
+    .then((response) => response.json());
+  };
 }

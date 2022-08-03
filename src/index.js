@@ -15,20 +15,25 @@ const involvementApiUrl = 'https://us-central1-involvement-api.cloudfunctions.ne
 const apiInv = new Api(involvementApiUrl);
 
 
-const apiInvList = apiInv.getDataInvolvement(involvementApiUrl);
 
-// add the logo
 
-//logo.innerHTML = `<img src="${pic}" alt="logo"></img>`;
 
 
 // Displaying 9 elements from the Api
 
 window.addEventListener('DOMContentLoaded', async() => {
   const list = await api.getData(url);
-  // console.log(list);
+  const apiInvList = await apiInv.getDataInvolvement(involvementApiUrl);
+  console.log(apiInvList);
 
+  apiInv.postDataInvolvement(involvementApiUrl, 2, 3);
+  // console.log(list);
   for (let i = 0; i < 9; i++) {
+    
+    // add like to invApi
+
+
+
     // console.log(list[i]);
     const movieBox = document.createElement('div');
     movieBox.classList.add('col-4');
@@ -41,7 +46,7 @@ window.addEventListener('DOMContentLoaded', async() => {
         <h4>${list[i].name}</h4>
         <div>
         <i class="material-icons">favorite</i>
-          <span class="likes-number">5 likes</span>
+          <span class="likes-number">${apiInvList[0].likes} likes</span>
         </div>
       </div>
       <button class="comments">Comments</button>
@@ -66,8 +71,21 @@ const close = document.querySelector('.closeBtn');
 // })
 
 moviesList.addEventListener('click', (e) => {
-if (e.target.classList.contains("comments")) {
+  let counter = 0;
+  if (e.target.classList.contains("comments")) {
   popup.classList.remove('visible');
   };
+
+  if (e.target.classList.contains('material-icons')) {
+    
+    counter++;
+    console.log(counter);
+    // const apiInvList = await apiInv.getDataInvolvement(involvementApiUrl);
+    
+  }
 });
+
+
+
+// Add likes to invApi
 
