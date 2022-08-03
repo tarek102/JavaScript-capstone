@@ -10,6 +10,11 @@ const url = 'https://api.tvmaze.com/shows';
 const moviesList = document.querySelector('.movies-list');
 
 const api = new Api(url);
+const involvementApiUrl = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/QfxZoPPt8C2jqpp5GvRx/likes';
+const apiInv = new Api(involvementApiUrl);
+
+
+const apiInvList = apiInv.getDataInvolvement(involvementApiUrl);
 
 
 
@@ -18,10 +23,10 @@ const api = new Api(url);
 
 window.addEventListener('DOMContentLoaded', async() => {
   const list = await api.getData(url);
-  console.log(list);
+  // console.log(list);
 
   for (let i = 0; i < 9; i++) {
-    console.log(list[i]);
+    // console.log(list[i]);
     const movieBox = document.createElement('div');
     movieBox.classList.add('col-4');
     movieBox.classList.add('movie-box');

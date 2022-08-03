@@ -11,4 +11,13 @@ export default class Api {
     const responseArr = await res;
     return responseArr;
   }
+
+  getDataInvolvement = async(invUrl) => {
+    const response = await fetch(invUrl, {
+      method: 'GET',
+    });
+    const res = await response.json();
+    const invResArray = await res;
+    console.log(invResArray);
+  }
 }
