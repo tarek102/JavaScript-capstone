@@ -1,7 +1,6 @@
 import _ from 'lodash';
 import './style.css';
 import Api from './modules/api';
-//import pic from '../src/img/movie-time-cinema-logo.png';
 
 
 
@@ -14,12 +13,12 @@ const api = new Api(url);
 const involvementApiUrl = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/QfxZoPPt8C2jqpp5GvRx/likes';
 const apiInv = new Api(involvementApiUrl);
 
+const btnComments = document.querySelectorAll('.comments');
+const popup = document.querySelector('.popup');
+const close = document.querySelector('.closeBtn');
+
 
 const apiInvList = apiInv.getDataInvolvement(involvementApiUrl);
-
-// add the logo
-
-//logo.innerHTML = `<img src="${pic}" alt="logo"></img>`;
 
 
 // Displaying 9 elements from the Api
@@ -44,30 +43,46 @@ window.addEventListener('DOMContentLoaded', async() => {
           <span class="likes-number">5 likes</span>
         </div>
       </div>
-      <button class="comments">Comments</button>
+      <button id=${list[i].id} class="comments">Comments</button>
     `;
     moviesList.appendChild(movieBox)
   }
 })
 
-// movieList.forEach(movie => {
-  
-// });
-
-const btnComments = document.querySelectorAll('.comments');
-const popup = document.querySelector('.popup');
-const close = document.querySelector('.closeBtn');
-
-
-
-
-// close.addEventListener('click', ()=> {
-  
-// })
+const showPopup = async(i) => {
+  i -= 1;
+  const list = await api.getData(url);
+  popup.innerHTML = `
+    <div class="back"></div>
+    <div class="content">
+      <div class="closeBtn">x</div>
+      <ul class="insidePopup">
+      <li>
+      <img src="${list[i].image.medium}">
+      </li>
+      <li>
+      <h1>${list[i].name}</h1>
+      <ul class="movieDescription">
+        <li>language: ${list[i].language}</li>
+        <li>rating: (average : ${list[i].rating.average})</li>
+        <li>genres: ${list[i].genres[0]}, ${list[i].genres[1]}</li>
+        <li>average run time: ${list[i].averageRuntime}</li>
+      </ul>
+      </li>
+    </div>
+  `;
+};
 
 moviesList.addEventListener('click', (e) => {
 if (e.target.classList.contains("comments")) {
+  showPopup(e.target.id);
   popup.classList.remove('visible');
   };
+});
+
+popup.addEventListener('click', (e) => {
+  if (e.target.classList.contains("closeBtn")) {
+    popup.classList.add('visible');
+  }
 });
 
