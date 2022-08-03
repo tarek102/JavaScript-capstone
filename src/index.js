@@ -1,11 +1,12 @@
 import _ from 'lodash';
 import './style.css';
 import Api from './modules/api';
+//import pic from '../src/img/movie-time-cinema-logo.png';
 
 
 
 // Variables
-
+const logo = document.querySelector('.logo');
 const url = 'https://api.tvmaze.com/shows';
 const moviesList = document.querySelector('.movies-list');
 
@@ -16,7 +17,9 @@ const apiInv = new Api(involvementApiUrl);
 
 const apiInvList = apiInv.getDataInvolvement(involvementApiUrl);
 
+// add the logo
 
+//logo.innerHTML = `<img src="${pic}" alt="logo"></img>`;
 
 
 // Displaying 9 elements from the Api
@@ -37,7 +40,7 @@ window.addEventListener('DOMContentLoaded', async() => {
       <div class="show-info">
         <h4>${list[i].name}</h4>
         <div>
-          <span class="like"></span>
+        <i class="material-icons">favorite</i>
           <span class="likes-number">5 likes</span>
         </div>
       </div>
@@ -51,5 +54,20 @@ window.addEventListener('DOMContentLoaded', async() => {
   
 // });
 
+const btnComments = document.querySelectorAll('.comments');
+const popup = document.querySelector('.popup');
+const close = document.querySelector('.closeBtn');
 
+
+
+
+// close.addEventListener('click', ()=> {
+  
+// })
+
+moviesList.addEventListener('click', (e) => {
+if (e.target.classList.contains("comments")) {
+  popup.classList.remove('visible');
+  };
+});
 
