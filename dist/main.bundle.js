@@ -150,6 +150,7 @@ eval("\n\n/* istanbul ignore next  */\nfunction styleTagTransform(css, styleElem
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
+
 eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash */ \"./node_modules/lodash/lodash.js\");\n/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./style.css */ \"./src/style.css\");\n/* harmony import */ var _modules_api__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/api */ \"./src/modules/api.js\");\nObject(function webpackMissingModule() { var e = new Error(\"Cannot find module 'prettier'\"); e.code = 'MODULE_NOT_FOUND'; throw e; }());\n\r\n\r\n\r\n\r\n\r\n// Variables\r\n\r\nconst url = 'https://api.tvmaze.com/shows';\r\n\r\nconst api = new _modules_api__WEBPACK_IMPORTED_MODULE_2__[\"default\"](url);\r\n\r\n\r\n\r\n\r\n// Displaying 9 elements from the Api\r\n\r\ndocument.body.addEventListener('DOMContentLoaded', async() => {\r\n  const movieList = api.getData(url);\r\n  console.log(movieList);\r\n})\r\n\r\n// movieList.forEach(movie => {\r\n  \r\n// });\r\n\r\n\r\n\r\n\n\n//# sourceURL=webpack://javascript-capstone/./src/index.js?");
 
 /***/ }),
@@ -162,6 +163,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var loda
 
 "use strict";
 eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ Api)\n/* harmony export */ });\nclass Api {\r\n  constructor (url) {\r\n    this.url = url;\r\n  }\r\n\r\n  getData = async(url) => {\r\n    const response = await fetch (url, {\r\n      method: 'GET',\r\n    });\r\n    const res = await response.json();\r\n    const responseArr = await res;\r\n    return responseArr;\r\n  }\r\n}\n\n//# sourceURL=webpack://javascript-capstone/./src/modules/api.js?");
+
 
 /***/ }),
 
@@ -184,17 +186,6 @@ eval("module.exports = __webpack_require__.p + \"10c1a813309b2c552c68.png\";\n\n
 
 "use strict";
 eval("module.exports = __webpack_require__.p + \"d1581e9b87327696e8c1.png\";\n\n//# sourceURL=webpack://javascript-capstone/./src/img/movie-time-cinema-logo.png?");
-
-/***/ }),
-
-/***/ "./img/movie-time-cinema-logo.png":
-/*!****************************************!*\
-  !*** ./img/movie-time-cinema-logo.png ***!
-  \****************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-eval("module.exports = __webpack_require__.p + \"d1581e9b87327696e8c1.png\";\n\n//# sourceURL=webpack://javascript-capstone/./img/movie-time-cinema-logo.png?");
 
 /***/ })
 
