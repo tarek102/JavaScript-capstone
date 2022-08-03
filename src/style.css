@@ -16,7 +16,7 @@ header {
 }
 
 .logo {
-  background-image: url('../src/img/movie-time-cinema-logo.png');
+  background-image: url('./img/movie-time-cinema-logo.png');
   background-size: cover;
   width: 50px;
   height: 50px;
@@ -78,7 +78,7 @@ nav ul li {
 .img-box {
   width: 200px;
   height: 150px;
-  background-image: url('../src/img/movie-time-cinema-logo.png');
+  /* background-image: url('./img/movie-time-cinema-logo.png'); */
   background-size: cover;
 }
 
@@ -106,7 +106,7 @@ nav ul li {
 .like {
   width: 20px;
   height: 20px;
-  background-image: url('../src/img/heart.png');
+  background-image: url('./img/heart.png');
   background-size: cover;
   display: block;
 }
