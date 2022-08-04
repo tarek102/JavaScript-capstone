@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import './style.css';
 import Api from './modules/api';
+import {postComment, getComment} from './modules/comment.js'
 
 
 
@@ -13,9 +14,9 @@ const api = new Api(url);
 const involvementApiUrl = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/QfxZoPPt8C2jqpp5GvRx/likes';
 const apiInv = new Api(involvementApiUrl);
 
-const btnComments = document.querySelectorAll('.comments');
+// const btnComments = document.querySelectorAll('.comments');
 const popup = document.querySelector('.popup');
-const close = document.querySelector('.closeBtn');
+// const close = document.querySelector('.closeBtn');
 
 
 const apiInvList = apiInv.getDataInvolvement(involvementApiUrl);
@@ -49,6 +50,12 @@ window.addEventListener('DOMContentLoaded', async() => {
   }
 })
 
+/*
+const dispalyComments =(i) => {
+  const comments = await getComment(i);
+};
+*/
+
 const showPopup = async(i) => {
   i -= 1;
   const list = await api.getData(url);
@@ -57,20 +64,34 @@ const showPopup = async(i) => {
     <div class="content">
       <div class="closeBtn">x</div>
       <ul class="insidePopup">
-      <li>
-      <img src="${list[i].image.medium}">
-      </li>
-      <li>
-      <h1>${list[i].name}</h1>
-      <ul class="movieDescription">
-        <li>language: ${list[i].language}</li>
-        <li>rating: (average : ${list[i].rating.average})</li>
-        <li>genres: ${list[i].genres[0]}, ${list[i].genres[1]}</li>
-        <li>average run time: ${list[i].averageRuntime}</li>
+        <li>
+          <img src="${list[i].image.medium}">
+        </li>
+        <li>
+          <h1>${list[i].name}</h1>
+          <ul class="movieDescription">
+            <li>language: ${list[i].language}</li>
+            <li>rating: (average : ${list[i].rating.average})</li>
+            <li>genres: ${list[i].genres[0]}, ${list[i].genres[1]}</li>
+            <li>average run time: ${list[i].averageRuntime}</li>
+          </ul>
+          <ul class="comments"></ul>
+        </li>
       </ul>
-      </li>
     </div>
   `;
+  const domComment = document.querySelector('.comments');
+  // domComment.innerHTML="get it";
+  const comments = await getComment(i+1);
+  const h5 = document.createElement('h5');
+  h5.innerHTML =`Comments (${comments.length})`;
+  domComment.appendChild(h5)
+  comments.forEach(comment => {
+    const li = document.createElement('li')
+    li.innerHTML = `${comment.creation_date} ${comment.username} => ${comment.comment}`
+    domComment.appendChild(li)
+  });
+
 };
 
 moviesList.addEventListener('click', (e) => {
@@ -85,4 +106,6 @@ popup.addEventListener('click', (e) => {
     popup.classList.add('visible');
   }
 });
+
+
 
