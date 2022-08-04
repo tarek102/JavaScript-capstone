@@ -76,21 +76,32 @@ const showPopup = async(i) => {
             <li>average run time: ${list[i].averageRuntime}</li>
           </ul>
           <ul class="comments"></ul>
+          <div class="addComments">
+            <h5>Add a comment</h5>
+            <form>
+            <input class="inputName" type="text" id="name" name="name" placeholder="Your name"><br>
+            <input class="inputComment" type="text" id="comment" name="comment" placeholder="Your insights"><br>
+            <input class="submit" type="submit" value="Comment">
+            </form>
+
+          </div>
         </li>
       </ul>
     </div>
   `;
+
+  // displa all comments
   const domComment = document.querySelector('.comments');
-  // domComment.innerHTML="get it";
   const comments = await getComment(i+1);
   const h5 = document.createElement('h5');
   h5.innerHTML =`Comments (${comments.length})`;
   domComment.appendChild(h5)
   comments.forEach(comment => {
     const li = document.createElement('li')
-    li.innerHTML = `${comment.creation_date} ${comment.username} => ${comment.comment}`
+    li.innerHTML = `${comment.creation_date} ${comment.username} : ${comment.comment}`
     domComment.appendChild(li)
   });
+
 
 };
 
@@ -104,6 +115,11 @@ if (e.target.classList.contains("comments")) {
 popup.addEventListener('click', (e) => {
   if (e.target.classList.contains("closeBtn")) {
     popup.classList.add('visible');
+  }
+  if (e.target.classList.contains("submit")) {
+    const nameInput = document.querySelector('.inputComment');
+    const commentInput = document.querySelector('.inputName');
+    postComment(id, nameInput.value, commentInput.value);
   }
 });
 
