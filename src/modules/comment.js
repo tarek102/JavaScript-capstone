@@ -1,4 +1,5 @@
 
+//const postLink = "https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/5bJnSsTxy7pcnpeTSp1e/comments";
 const postLink = "https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/LcQm2NEKuj4kzYqbfKgh/comments";
 
 const postComment = async(id,name,comment) => {
@@ -14,9 +15,8 @@ const postComment = async(id,name,comment) => {
       comment: comment,
     }),
   });
-  const listComment = await response.json();
-  return   listComment;
-  ;
+  const listComment = await JSON.parse(JSON.stringify(response));
+  return listComment ;
 };
 
 const getComment = async(id) => {

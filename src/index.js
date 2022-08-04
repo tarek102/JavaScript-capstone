@@ -1,9 +1,6 @@
-import _ from 'lodash';
 import './style.css';
 import Api from './modules/api';
-import {postComment, getComment} from './modules/comment.js'
-
-
+import {postComment, getComment} from './modules/comment.js';
 
 // Variables
 const logo = document.querySelector('.logo');
@@ -13,12 +10,7 @@ const moviesList = document.querySelector('.movies-list');
 const api = new Api(url);
 const involvementApiUrl = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/QfxZoPPt8C2jqpp5GvRx/likes';
 const apiInv = new Api(involvementApiUrl);
-
-// const btnComments = document.querySelectorAll('.comments');
 const popup = document.querySelector('.popup');
-// const close = document.querySelector('.closeBtn');
-
-
 const apiInvList = apiInv.getDataInvolvement(involvementApiUrl);
 
 
@@ -26,10 +18,8 @@ const apiInvList = apiInv.getDataInvolvement(involvementApiUrl);
 
 window.addEventListener('DOMContentLoaded', async() => {
   const list = await api.getData(url);
-  // console.log(list);
 
   for (let i = 0; i < 9; i++) {
-    // console.log(list[i]);
     const movieBox = document.createElement('div');
     movieBox.classList.add('col-4');
     movieBox.classList.add('movie-box');
@@ -50,11 +40,20 @@ window.addEventListener('DOMContentLoaded', async() => {
   }
 })
 
-/*
-const dispalyComments =(i) => {
+const display = async(i) => {
+  const domComment = document.querySelector('.comments');
+  domComment.innerHTML = '';
   const comments = await getComment(i);
-};
-*/
+  const h5 = document.createElement('h5');
+  h5.innerHTML =`Comments (${comments.length})`;
+  domComment.appendChild(h5)
+  comments.forEach(comment => {
+    const li = document.createElement('li');
+    li.innerHTML = `${comment.creation_date} ${comment.username} : ${comment.comment}`;
+    domComment.appendChild(li)
+  });
+
+}
 
 const showPopup = async(i) => {
   i -= 1;
@@ -62,7 +61,7 @@ const showPopup = async(i) => {
   popup.innerHTML = `
     <div class="back"></div>
     <div class="content">
-      <div class="closeBtn">x</div>
+      <div class="closeBtn">✖️</div>
       <ul class="insidePopup">
         <li>
           <img src="${list[i].image.medium}">
@@ -81,27 +80,25 @@ const showPopup = async(i) => {
             <form>
             <input class="inputName" type="text" id="name" name="name" placeholder="Your name"><br>
             <input class="inputComment" type="text" id="comment" name="comment" placeholder="Your insights"><br>
-            <input class="submit" type="submit" value="Comment">
+            <input class="submit" id=${list[i+1].id} type="submit" value="Comment">
             </form>
-
           </div>
         </li>
       </ul>
     </div>
   `;
 
-  // displa all comments
   const domComment = document.querySelector('.comments');
+  domComment.innerHTML = '';
   const comments = await getComment(i+1);
   const h5 = document.createElement('h5');
   h5.innerHTML =`Comments (${comments.length})`;
   domComment.appendChild(h5)
   comments.forEach(comment => {
-    const li = document.createElement('li')
-    li.innerHTML = `${comment.creation_date} ${comment.username} : ${comment.comment}`
+    const li = document.createElement('li');
+    li.innerHTML = `${comment.creation_date} ${comment.username} : ${comment.comment}`;
     domComment.appendChild(li)
   });
-
 
 };
 
@@ -113,13 +110,23 @@ if (e.target.classList.contains("comments")) {
 });
 
 popup.addEventListener('click', (e) => {
+  e.preventDefault();
   if (e.target.classList.contains("closeBtn")) {
     popup.classList.add('visible');
   }
   if (e.target.classList.contains("submit")) {
-    const nameInput = document.querySelector('.inputComment');
-    const commentInput = document.querySelector('.inputName');
-    postComment(id, nameInput.value, commentInput.value);
+    const nameInput = document.querySelector('.inputName');
+    const commentInput = document.querySelector('.inputComment');
+    if (nameInput.value === '' ||commentInput.value === ''){
+      nameInput.placeholder = "Please fill your name";
+      commentInput.placeholder = "Please fill your comment";
+    }
+    else {
+      postComment(e.target.id-1, nameInput.value, commentInput.value);
+      display(e.target.id-1);
+      nameInput.value = '';
+      commentInput.value = '';
+    }
   }
 });
 

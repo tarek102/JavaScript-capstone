@@ -18,6 +18,6 @@ export default class Api {
     });
     const res = await response.json();
     const invResArray = await res;
-    console.log(invResArray);
+    //console.log(invResArray);
   }
 }
