@@ -14,11 +14,13 @@ const popup = document.querySelector('.popup');
 const apiInvList = apiInv.getDataInvolvement(involvementApiUrl);
 
 
+
 // Displaying 9 elements from the Api
 
 window.addEventListener('DOMContentLoaded', async() => {
   const list = await api.getData(url);
-
+  apiInv.postDataInvolvement(involvementApiUrl, 2, 3);
+  // console.log(list);
   for (let i = 0; i < 9; i++) {
     const movieBox = document.createElement('div');
     movieBox.classList.add('col-4');
@@ -31,7 +33,7 @@ window.addEventListener('DOMContentLoaded', async() => {
         <h4>${list[i].name}</h4>
         <div>
         <i class="material-icons">favorite</i>
-          <span class="likes-number">5 likes</span>
+          <span class="likes-number">${apiInvList[0].likes} likes</span>
         </div>
       </div>
       <button id=${list[i].id} class="comments">Comments</button>
@@ -103,11 +105,28 @@ const showPopup = async(i) => {
 };
 
 moviesList.addEventListener('click', (e) => {
+
+  let counter = 0;
+
 if (e.target.classList.contains("comments")) {
   showPopup(e.target.id);
+
   popup.classList.remove('visible');
   };
+
+  if (e.target.classList.contains('material-icons')) {
+    
+    counter++;
+    console.log(counter);
+    // const apiInvList = await apiInv.getDataInvolvement(involvementApiUrl);
+    
+  }
 });
+
+
+
+
+// Add likes to invApi
 
 popup.addEventListener('click', (e) => {
   e.preventDefault();
@@ -129,6 +148,3 @@ popup.addEventListener('click', (e) => {
     }
   }
 });
-
-
-
