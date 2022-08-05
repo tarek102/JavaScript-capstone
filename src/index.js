@@ -43,26 +43,27 @@ window.addEventListener('DOMContentLoaded', async() => {
         </div>
       </div>
       <button id=${list[i].id} class="comments">Comments</button>
-    `;
-    // console.log(apiInvList[i].item_id);
-  
+    `;  
     moviesList.appendChild(movieBox)
   }
 })
 
+const countComments = (arr) => {
+  return (arr.length);
+};
+
 const display = async(i) => {
   const domComment = document.querySelector('.comments');
-  domComment.innerHTML = '';
+  domComment.innerHTML = ``;
   const comments = await getComment(i);
   const h5 = document.createElement('h5');
-  h5.innerHTML =`Comments (${comments.length})`;
+  h5.innerHTML =`Comments (${countComments(comments)})`;
   domComment.appendChild(h5)
   comments.forEach(comment => {
     const li = document.createElement('li');
     li.innerHTML = `${comment.creation_date} ${comment.username} : ${comment.comment}`;
     domComment.appendChild(li)
   });
-
 }
 
 const showPopup = async(i) => {
@@ -73,13 +74,12 @@ const showPopup = async(i) => {
     <div class="content">
       <div class="closeBtn">✖️</div>
       <ul class="insidePopup">
-
-      <li>
-      <img src="${list[i].image.medium}">
-      </li>
-      <li>
-      <h1>${list[i].name}</h1>
-      <ul class="movieDescription">
+        <li>
+          <img src="${list[i].image.medium}">
+        </li>
+        <li>
+          <h1>${list[i].name}</h1>
+          <ul class="movieDescription">
         <li><strong>language:</strong> ${list[i].language}</li>
         <li><strong>rating:</strong> (average : ${list[i].rating.average})</li>
         <li><strong>genres:</strong> ${list[i].genres[0]}, ${list[i].genres[1]}</li>
@@ -98,19 +98,7 @@ const showPopup = async(i) => {
       </ul>
     </div>
   `;
-
-  const domComment = document.querySelector('.comments');
-  domComment.innerHTML = '';
-  const comments = await getComment(i+1);
-  const h5 = document.createElement('h5');
-  h5.innerHTML =`Comments (${comments.length})`;
-  domComment.appendChild(h5)
-  comments.forEach(comment => {
-    const li = document.createElement('li');
-    li.innerHTML = `${comment.creation_date} ${comment.username} : ${comment.comment}`;
-    domComment.appendChild(li)
-  });
-
+  display(i+1);
 };
 
 moviesList.addEventListener('click', (e) => {
@@ -161,8 +149,8 @@ popup.addEventListener('click', (e) => {
       commentInput.placeholder = "Please fill your comment";
     }
     else {
-      postComment(e.target.id-1, nameInput.value, commentInput.value);
-      display(e.target.id-1);
+      postComment(e.target.id-1, nameInput.value, commentInput.value)
+      .then(() => (getComment(e.target.id-1)).then(() => display(e.target.id-1)));
       nameInput.value = '';
       commentInput.value = '';
     }
