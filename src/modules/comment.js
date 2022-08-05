@@ -1,7 +1,7 @@
-const postLink = "https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/udzCgymaPppgGj4gkx49/comments";
+const postLink = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/udzCgymaPppgGj4gkx49/comments';
 
-const postComment = async(id,name,comment) => {
-  const newId = "item"+id;
+const postComment = async (id, name, comment) => {
+  const newId = `item${id}`;
   const response = await fetch(postLink, {
     method: 'POST',
     headers: {
@@ -10,18 +10,18 @@ const postComment = async(id,name,comment) => {
     body: JSON.stringify({
       item_id: newId,
       username: name,
-      comment: comment,
+      comment,
     }),
   });
   const listComment = await JSON.parse(JSON.stringify(response));
-  return listComment ;
+  return listComment;
 };
 
-const getComment = async(id) => {
-  const getLink = postLink+'?item_id=item'+id;
-  const response = await fetch (getLink);
+const getComment = async (id) => {
+  const getLink = `${postLink}?item_id=item${id}`;
+  const response = await fetch(getLink);
   const data = await response.json();
   return data;
-}
+};
 
-export {postComment, getComment};
+export { postComment, getComment };

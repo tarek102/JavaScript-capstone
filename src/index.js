@@ -1,10 +1,8 @@
 import './style.css';
-import img from './img/movie-time-cinema-logo.png'
-import Api from './modules/api';
-import {postComment, getComment} from './modules/comment.js';
+import Api from './modules/api.js';
+import { postComment, getComment } from './modules/comment.js';
 
 // Variables
-const logo = document.querySelector('.logo');
 const url = 'https://api.tvmaze.com/shows';
 const moviesList = document.querySelector('.movies-list');
 
@@ -13,29 +11,22 @@ const involvementApiUrl = 'https://us-central1-involvement-api.cloudfunctions.ne
 const apiInv = new Api(involvementApiUrl);
 const popup = document.querySelector('.popup');
 const moviesCount = document.querySelector('.movies-count');
-const apiInvList = apiInv.getDataInvolvement(involvementApiUrl);
-
-// Add the logo
-//logo.innerHTML = `<img src="${img}" alt="logo">`;
-
 
 const allItemsCounter = () => {
-  
   if (moviesList.children) {
     return (moviesList.children.length - 1);
   }
-}
-
+  return 0;
+};
 
 // Displaying 12 elements from the Api
 
-window.addEventListener('DOMContentLoaded', async() => {
+window.addEventListener('DOMContentLoaded', async () => {
   const list = await api.getData(url);
 
   const apiInvList = await apiInv.getDataInvolvement(involvementApiUrl);
-  console.log(involvementApiUrl);
 
-  for (let i = 0; i < 12; i++) {
+  for (let i = 0; i < 12; i += 1) {
     const movieBox = document.createElement('div');
     movieBox.classList.add('col-3');
     movieBox.classList.add('movie-box');
@@ -51,33 +42,31 @@ window.addEventListener('DOMContentLoaded', async() => {
         </div>
       </div>
       <button id=${list[i].id} class="comments">Comments</button>
-    `;  
-    moviesList.appendChild(movieBox)
+    `;
+    moviesList.appendChild(movieBox);
   }
   moviesCount.innerHTML = `
     Movies(${allItemsCounter()})
   `;
-})
+});
 
-const countComments = (arr) => {
-  return (arr.length);
-};
+const countComments = (arr) => (arr.length);
 
-const display = async(i) => {
+const display = async (i) => {
   const domComment = document.querySelector('.comments');
-  domComment.innerHTML = ``;
+  domComment.innerHTML = '';
   const comments = await getComment(i);
   const h5 = document.createElement('h5');
-  h5.innerHTML =`Comments (${countComments(comments)})`;
-  domComment.appendChild(h5)
-  comments.forEach(comment => {
+  h5.innerHTML = `Comments (${countComments(comments)})`;
+  domComment.appendChild(h5);
+  comments.forEach((comment) => {
     const li = document.createElement('li');
     li.innerHTML = `${comment.creation_date} ${comment.username} : ${comment.comment}`;
-    domComment.appendChild(li)
+    domComment.appendChild(li);
   });
-}
+};
 
-const showPopup = async(i) => {
+const showPopup = async (i) => {
   i -= 1;
   const list = await api.getData(url);
   popup.innerHTML = `
@@ -102,46 +91,39 @@ const showPopup = async(i) => {
             <form>
             <input class="inputName" type="text" id="name" name="name" placeholder="Your name"><br>
             <input class="inputComment" type="text" id="comment" name="comment" placeholder="Your insights"><br>
-            <input class="submit" id=${list[i+1].id} type="submit" value="Comment">
+            <input class="submit" id=${list[i + 1].id} type="submit" value="Comment">
             </form>
           </div>
         </li>
       </ul>
     </div>
   `;
-  display(i+1);
+  display(i + 1);
 };
 
 moviesList.addEventListener('click', (e) => {
+  if (e.target.classList.contains('comments')) {
+    showPopup(e.target.id);
 
-
-
-  if (e.target.classList.contains("comments")) {
-  showPopup(e.target.id);
-
-  popup.classList.remove('visible');
-  };
+    popup.classList.remove('visible');
+  }
 
   // Add likes to invApi
   if (e.target.classList.contains('material-icons')) {
-      const likesNum = e.target.nextElementSibling;
-      const itemID = `item${e.target.dataset.id}`;
-      const getLikes = async () => {
-      const list = await api.getData(url);
+    const likesNum = e.target.nextElementSibling;
+    const itemID = `item${e.target.dataset.id}`;
+    const getLikes = async () => {
       const apiInvList = await apiInv.getDataInvolvement(involvementApiUrl);
-      
-      apiInvList.forEach(movie => {
-        if(movie.item_id == itemID){
-          likesNum.innerHTML = `${movie.likes + 1}`
-        }
-        
-       
-      });
 
-    }
+      apiInvList.forEach((movie) => {
+        if (movie.item_id === itemID) {
+          likesNum.innerHTML = `${movie.likes + 1}`;
+        }
+      });
+    };
     const postLikes = () => {
       apiInv.postDataInvolvement(itemID);
-    }
+    };
     getLikes();
     postLikes();
   }
@@ -149,19 +131,18 @@ moviesList.addEventListener('click', (e) => {
 
 popup.addEventListener('click', (e) => {
   e.preventDefault();
-  if (e.target.classList.contains("closeBtn")) {
+  if (e.target.classList.contains('closeBtn')) {
     popup.classList.add('visible');
   }
-  if (e.target.classList.contains("submit")) {
+  if (e.target.classList.contains('submit')) {
     const nameInput = document.querySelector('.inputName');
     const commentInput = document.querySelector('.inputComment');
-    if (nameInput.value === '' ||commentInput.value === ''){
-      nameInput.placeholder = "Please fill your name";
-      commentInput.placeholder = "Please fill your comment";
-    }
-    else {
-      postComment(e.target.id-1, nameInput.value, commentInput.value)
-      .then(() => (getComment(e.target.id-1)).then(() => display(e.target.id-1)));
+    if (nameInput.value === '' || commentInput.value === '') {
+      nameInput.placeholder = 'Please fill your name';
+      commentInput.placeholder = 'Please fill your comment';
+    } else {
+      postComment(e.target.id - 1, nameInput.value, commentInput.value)
+        .then(() => (getComment(e.target.id - 1)).then(() => display(e.target.id - 1)));
       nameInput.value = '';
       commentInput.value = '';
     }
