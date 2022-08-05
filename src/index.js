@@ -21,9 +21,8 @@ window.addEventListener('DOMContentLoaded', async () => {
   const list = await api.getData(url);
 
   const apiInvList = await apiInv.getDataInvolvement(involvementApiUrl);
-  // console.log(involvementApiUrl);
 
-  for (let i = 0; i < 9; i += 1) {
+  for (let i = 0; i < 12; i += 1) {
     const movieBox = document.createElement('div');
     movieBox.classList.add('col-3');
     movieBox.classList.add('movie-box');
@@ -71,7 +70,7 @@ const showPopup = async (i) => {
     <div class="content">
       <div class="closeBtn">✖️</div>
       <ul class="insidePopup">
-        <li>
+        <li class="image">
           <img src="${list[i].image.medium}">
         </li>
         <li>
@@ -110,7 +109,6 @@ moviesList.addEventListener('click', (e) => {
     const likesNum = e.target.nextElementSibling;
     const itemID = `item${e.target.dataset.id}`;
     const getLikes = async () => {
-      // const list = await api.getData(url);
       const apiInvList = await apiInv.getDataInvolvement(involvementApiUrl);
 
       apiInvList.forEach((movie) => {

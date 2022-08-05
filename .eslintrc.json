@@ -13,10 +13,21 @@
   "rules": {
     "no-shadow": "off",
     "no-param-reassign": "off",
+<<<<<<< HEAD
     "eol-last": "off"
+=======
+    "eol-last": "off",
+    "import/extensions": [ 1, {
+      "js": "always", "json": "always"
+    }]
+>>>>>>> 832e69b08f86a7c94ebff5d7ee7037556369265d
   },
   "ignorePatterns": [
     "dist/",
     "build/"
   ]
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 832e69b08f86a7c94ebff5d7ee7037556369265d
