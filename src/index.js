@@ -1,3 +1,5 @@
+
+import _, { get } from 'lodash';
 import './style.css';
 import Api from './modules/api';
 import {postComment, getComment} from './modules/comment.js';
@@ -8,10 +10,12 @@ const url = 'https://api.tvmaze.com/shows';
 const moviesList = document.querySelector('.movies-list');
 
 const api = new Api(url);
-const involvementApiUrl = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/QfxZoPPt8C2jqpp5GvRx/likes';
+const involvementApiUrl = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/e5ZZUp1Dru5ZzFGEqAeR/likes';
+// console.log(involvementApiUrl);
 const apiInv = new Api(involvementApiUrl);
 const popup = document.querySelector('.popup');
 const apiInvList = apiInv.getDataInvolvement(involvementApiUrl);
+
 
 
 
@@ -19,25 +23,29 @@ const apiInvList = apiInv.getDataInvolvement(involvementApiUrl);
 
 window.addEventListener('DOMContentLoaded', async() => {
   const list = await api.getData(url);
-  apiInv.postDataInvolvement(involvementApiUrl, 2, 3);
-  // console.log(list);
+
+  const apiInvList = await apiInv.getDataInvolvement(involvementApiUrl);
+  console.log(involvementApiUrl);
+
   for (let i = 0; i < 9; i++) {
     const movieBox = document.createElement('div');
-    movieBox.classList.add('col-4');
+    movieBox.classList.add('col-3');
     movieBox.classList.add('movie-box');
     movieBox.innerHTML = `
-      <div class="">
+      <div class="image-box">
       <img src="${list[i].image.medium}">
       </div>
       <div class="show-info">
         <h4>${list[i].name}</h4>
         <div>
-        <i class="material-icons">favorite</i>
-          <span class="likes-number">${apiInvList[0].likes} likes</span>
+        <i data-id="${list[i].id}" class="material-icons">favorite</i>
+          <span class="likes-number">${apiInvList[i].likes}</span>
         </div>
       </div>
       <button id=${list[i].id} class="comments">Comments</button>
     `;
+    // console.log(apiInvList[i].item_id);
+  
     moviesList.appendChild(movieBox)
   }
 })
@@ -65,16 +73,17 @@ const showPopup = async(i) => {
     <div class="content">
       <div class="closeBtn">✖️</div>
       <ul class="insidePopup">
-        <li>
-          <img src="${list[i].image.medium}">
-        </li>
-        <li>
-          <h1>${list[i].name}</h1>
-          <ul class="movieDescription">
-            <li>language: ${list[i].language}</li>
-            <li>rating: (average : ${list[i].rating.average})</li>
-            <li>genres: ${list[i].genres[0]}, ${list[i].genres[1]}</li>
-            <li>average run time: ${list[i].averageRuntime}</li>
+
+      <li>
+      <img src="${list[i].image.medium}">
+      </li>
+      <li>
+      <h1>${list[i].name}</h1>
+      <ul class="movieDescription">
+        <li><strong>language:</strong> ${list[i].language}</li>
+        <li><strong>rating:</strong> (average : ${list[i].rating.average})</li>
+        <li><strong>genres:</strong> ${list[i].genres[0]}, ${list[i].genres[1]}</li>
+        <li><strong>average run time:</strong> ${list[i].averageRuntime}</li>
           </ul>
           <ul class="comments"></ul>
           <div class="addComments">
@@ -106,27 +115,38 @@ const showPopup = async(i) => {
 
 moviesList.addEventListener('click', (e) => {
 
-  let counter = 0;
 
-if (e.target.classList.contains("comments")) {
+
+  if (e.target.classList.contains("comments")) {
   showPopup(e.target.id);
 
   popup.classList.remove('visible');
   };
 
+  // Add likes to invApi
   if (e.target.classList.contains('material-icons')) {
-    
-    counter++;
-    console.log(counter);
-    // const apiInvList = await apiInv.getDataInvolvement(involvementApiUrl);
-    
+      const likesNum = e.target.nextElementSibling;
+      const itemID = `item${e.target.dataset.id}`;
+      const getLikes = async () => {
+      const list = await api.getData(url);
+      const apiInvList = await apiInv.getDataInvolvement(involvementApiUrl);
+      
+      apiInvList.forEach(movie => {
+        if(movie.item_id == itemID){
+          likesNum.innerHTML = `${movie.likes + 1}`
+        }
+        
+       
+      });
+
+    }
+    const postLikes = () => {
+      apiInv.postDataInvolvement(itemID);
+    }
+    getLikes();
+    postLikes();
   }
 });
-
-
-
-
-// Add likes to invApi
 
 popup.addEventListener('click', (e) => {
   e.preventDefault();
