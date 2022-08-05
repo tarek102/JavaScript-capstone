@@ -10,13 +10,21 @@ const url = 'https://api.tvmaze.com/shows';
 const moviesList = document.querySelector('.movies-list');
 
 const api = new Api(url);
-const involvementApiUrl = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/e5ZZUp1Dru5ZzFGEqAeR/likes';
-// console.log(involvementApiUrl);
+const involvementApiUrl = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/udzCgymaPppgGj4gkx49/likes';
 const apiInv = new Api(involvementApiUrl);
 const popup = document.querySelector('.popup');
+const moviesCount = document.querySelector('.movies-count');
 const apiInvList = apiInv.getDataInvolvement(involvementApiUrl);
 
 
+
+
+const allItemsCounter = () => {
+  
+  if (moviesList.children) {
+    return (moviesList.children.length - 1);
+  }
+}
 
 
 // Displaying 9 elements from the Api
@@ -46,6 +54,9 @@ window.addEventListener('DOMContentLoaded', async() => {
     `;  
     moviesList.appendChild(movieBox)
   }
+  moviesCount.innerHTML = `
+    Movies(${allItemsCounter()})
+  `;
 })
 
 const countComments = (arr) => {
