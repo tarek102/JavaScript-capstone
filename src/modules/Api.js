@@ -1,10 +1,10 @@
 export default class Api {
-  constructor (url) {
+  constructor(url) {
     this.url = url;
   }
 
-  getData = async(url) => {
-    const response = await fetch (url, {
+  getData = async (url) => {
+    const response = await fetch(url, {
       method: 'GET',
     });
     const res = await response.json();
@@ -12,7 +12,7 @@ export default class Api {
     return responseArr;
   }
 
-  getDataInvolvement = async(invUrl) => {
+  getDataInvolvement = async (invUrl) => {
     const response = await fetch(invUrl, {
       method: 'GET',
     });
@@ -22,13 +22,12 @@ export default class Api {
   };
 
   postDataInvolvement = async (id) => {
-   const response = await fetch('https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/udzCgymaPppgGj4gkx49/likes', {
+    const response = await fetch('https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/udzCgymaPppgGj4gkx49/likes', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json; charset=UTF-8' },
-      body: JSON.stringify({item_id: id}),
+      body: JSON.stringify({ item_id: id }),
     });
     const post = await response.text();
     return post;
-    
   };
 }
