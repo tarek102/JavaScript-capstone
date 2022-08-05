@@ -21,12 +21,14 @@ export default class Api {
     return invResArray;
   };
 
-  postDataInvolvement = async (invUrl, likes, like_id) => {
-    await fetch(invUrl, {
+  postDataInvolvement = async (id) => {
+   const response = await fetch('https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/e5ZZUp1Dru5ZzFGEqAeR/likes', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json; charset=UTF-8' },
-      body: JSON.stringify({ likes , like_id}),
-    })
-    .then((response) => response.json());
+      body: JSON.stringify({item_id: id}),
+    });
+    const post = await response.text();
+    return post;
+    
   };
 }

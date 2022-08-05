@@ -1,6 +1,7 @@
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 ul {
@@ -11,15 +12,22 @@ ul {
 
 header {
   display: flex;
-  padding: 20px;
+  padding: 10px 80px;
   justify-content: flex-start;
+  background-color: rgb(0, 252, 252);
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 100%;
 }
 
-.logo {
-  background-image: url('./img/movie-time-cinema-logo.png');
-  background-size: cover;
-  width: 50px;
-  height: 50px;
+section {
+  margin-top: 160px;
+}
+
+.logo-icon {
+  font-size: 70px;
+  cursor: pointer;
 }
 
 header nav ul {
@@ -31,6 +39,8 @@ header nav ul {
 nav ul li {
   list-style: none;
   margin-left: 70px;
+  cursor: pointer;
+  font-weight: 500;
 }
 
 .shows {
@@ -89,9 +99,17 @@ nav ul li {
   margin-bottom: 0;
 }
 
+.insidePopup > li:last-child {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 50px;
+  width: 100%;
+}
+
 .popup .movieDescription {
   margin-top: 30px;
-  margin-left: 40px;
+  padding-left: 0;
 }
 
 /* ############ body ############ */
@@ -107,21 +125,43 @@ nav ul li {
 
 .show-info {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
+  width: 100%;
   margin: 20px 0;
+  margin-left: 5px;
+}
+
+.movies-list {
+  justify-content: center;
 }
 
 .movie-box {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
+  justify-content: center;
   margin: 75px 0;
+
 }
 
 .show-info div {
   display: flex;
-  flex-direction: column;
-  margin: 0 25px;
+  width: 50%;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.show-info h4 {
+  font-size: 17px;
+  width: 100%;
+}
+
+.image-box {
+  width: 100%;
+}
+
+.image-box img {
+  width: 100%;
 }
 
 .like {
@@ -130,6 +170,24 @@ nav ul li {
   background-image: url('./img/heart.png');
   background-size: cover;
   display: block;
+}
+
+.material-icons {
+  cursor: pointer;
+}
+
+.comments {
+  width: 100%;
+  border: none;
+  padding: 10px 15px;
+  font-weight: 600;
+  background-color: rgb(0, 252, 252);
+}
+
+.comments:hover {
+  background-color: rgb(0, 143, 143);
+  color: aliceblue;
+  transition: calc(700ms);
 }
 
 /* ############ footer ############ */
