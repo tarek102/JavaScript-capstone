@@ -1,6 +1,5 @@
-
-import _, { get } from 'lodash';
 import './style.css';
+import img from './img/movie-time-cinema-logo.png'
 import Api from './modules/api';
 import {postComment, getComment} from './modules/comment.js';
 
@@ -16,7 +15,8 @@ const popup = document.querySelector('.popup');
 const moviesCount = document.querySelector('.movies-count');
 const apiInvList = apiInv.getDataInvolvement(involvementApiUrl);
 
-
+// Add the logo
+//logo.innerHTML = `<img src="${img}" alt="logo">`;
 
 
 const allItemsCounter = () => {
@@ -27,7 +27,7 @@ const allItemsCounter = () => {
 }
 
 
-// Displaying 9 elements from the Api
+// Displaying 12 elements from the Api
 
 window.addEventListener('DOMContentLoaded', async() => {
   const list = await api.getData(url);
@@ -35,7 +35,7 @@ window.addEventListener('DOMContentLoaded', async() => {
   const apiInvList = await apiInv.getDataInvolvement(involvementApiUrl);
   console.log(involvementApiUrl);
 
-  for (let i = 0; i < 9; i++) {
+  for (let i = 0; i < 12; i++) {
     const movieBox = document.createElement('div');
     movieBox.classList.add('col-3');
     movieBox.classList.add('movie-box');
@@ -85,7 +85,7 @@ const showPopup = async(i) => {
     <div class="content">
       <div class="closeBtn">✖️</div>
       <ul class="insidePopup">
-        <li>
+        <li class="image">
           <img src="${list[i].image.medium}">
         </li>
         <li>

@@ -51,6 +51,7 @@ nav ul li {
 .visible {
   display: none;
 }
+
 .popup .back {
   width: 100%;
   height: 100vh;
@@ -65,6 +66,8 @@ nav ul li {
   z-index: 2;
   width: 80%;
   min-height: 50vh;
+  max-height: 80vh;
+  overflow: scroll;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -80,11 +83,10 @@ nav ul li {
   top: 10px;
   cursor: pointer;
   font-size: 2em;
-  /* color: white;
-  background-color: black;
-  height: 30px;
-  width: 30px;
-  border-radius: 50%; */
+}
+
+.image {
+  margin-top: 5%;
 }
 
 .popup h1 {
@@ -108,12 +110,27 @@ nav ul li {
 }
 
 .popup .movieDescription {
-  margin-top: 30px;
-  padding-left: 0;
+  margin: 10px 0px 10px 30px;
 }
 
-input {
+.addComments h5 {
+  margin-top: 10px;
+}
+
+.inputName {
+  width: 80%;
+  border: 2px solid black;
+  border-radius: 5px;
+  padding-left: 5px;
+}
+
+.inputComment {
   width: 100%;
+  height: 50px;
+  margin-top: 10px;
+  border: 2px solid black;
+  border-radius: 5px;
+  padding: 5px;
 }
 
 .submit {
@@ -125,14 +142,6 @@ input {
   box-shadow: -1px 2px 0 black, -4px 6px 0 #00000039;
   cursor: pointer;
   padding: 5px 10px;
-}
-/* ############ body ############ */
-
-.img-box {
-  width: 200px;
-  height: 150px;
-  /* background-image: url('./img/movie-time-cinema-logo.png'); */
-  background-size: cover;
 }
 
 /* Main Section */
@@ -205,6 +214,10 @@ input {
 }
 
 /* ############ footer ############ */
+
+footer p {
+  margin-bottom: 0;
+}
 
 .footer {
   padding: 30px 10px;
