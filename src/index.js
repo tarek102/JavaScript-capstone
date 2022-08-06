@@ -1,3 +1,4 @@
+import fetch from 'node-fetch';
 import '../src/style.css';
 import Api from './modules/Api';
 import { postComment, getComment } from './modules/comment';
