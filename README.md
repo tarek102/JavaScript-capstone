@@ -1,25 +1,36 @@
 ![](https://img.shields.io/badge/Microverse-blueviolet)
 
-# JavaScript group capstone
+# JavaScript group project capstone (Movie web app)
 
 
-In this project I have used linter for HTML and CSS and Javascript, to make sure there are no linter errors on the code.
+In this project we have created a tv list web app, that shows the ny=umber of the movies and displays info about the movie, you can like or add a comment to each movie. The app was built using 2 Apis, one is for the tv list and another one for the likes and comments.
 
 ## Built With
 
 - HTML
 - CSS
 - Javascript
+- Webpack
+- Jest
 
 
-## Live Demo (if available)
+## Live Demo 
 
-[Demo](https://github.com/tarek102/JavaScript-capstone//dist/)
+[Demo](https://tarek102.github.io/JavaScript-capstone/dist/)
 
 
 ## Getting Started
 
-To successfully utilize this project first of all you need to clone or download the repository. Next, open the index.html file to check the website’s main page. If you want to add or edit the files you can do that by simply opening the file folder in VS code.
+To successfully utilize this project first of all you need to clone or download the repository. If you want to add or edit the files you can do that by simply opening the file folder in VS code. Once you have the project opened in the Vs code, write in the terminal the following commands:
+
+- npm install
+- npm run build
+- npm start
+
+
+index.html from the dist directory will be opened in the browser.
+
+If you want to install Webpack visit [Webpack installation](https://webpack.js.org/guides/installation/)
 
 
 ## prerequisites:
