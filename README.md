@@ -26,6 +26,7 @@ To successfully utilize this project first of all you need to clone or download 
 - npm install
 - npm run build
 - npm start
+- npm run test
 
 
 index.html from the dist directory will be opened in the browser.
