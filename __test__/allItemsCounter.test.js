@@ -3,13 +3,17 @@ import allItemsCounter from '../src/modules/allItemsCounter';
 describe('Items counter test', () => {
   document.body.innerHTML = `
   <div class="row movies-list">
-    <h2 class="movies-count"></h2>
+    <p>Under the Dome</p>
+    <p>Person of Interest</p>
+    <p>Bitten</p>
+    <p>Arrow</p>
+    <p>True Detective</p>
   </div>
   `;
 
   test('items number: ', () => {
     const moviesList = document.querySelector('.movies-list');
     allItemsCounter();
-    expect(moviesList.children.length).toEqual(9);
+    expect(moviesList.children.length).toEqual(5);
   });
 });
