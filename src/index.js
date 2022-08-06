@@ -1,10 +1,9 @@
 import './style.css';
-import Api from './modules/api.js';
+import Api from './modules/Api.js';
 import { postComment, getComment } from './modules/comment.js';
 import allItemsCounter from './modules/allItemsCounter.js';
 
 // Variables
-// const logo = document.querySelector('.logo');
 const url = 'https://api.tvmaze.com/shows';
 const moviesList = document.querySelector('.movies-list');
 
@@ -13,7 +12,6 @@ const involvementApiUrl = 'https://us-central1-involvement-api.cloudfunctions.ne
 const apiInv = new Api(involvementApiUrl);
 const popup = document.querySelector('.popup');
 const moviesCount = document.querySelector('.movies-count');
-// const apiInvList = apiInv.getDataInvolvement(involvementApiUrl);
 
 // Displaying 9 elements from the Api
 
