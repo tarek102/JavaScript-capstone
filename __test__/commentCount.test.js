@@ -1,6 +1,6 @@
-import {getComment} from '../__mock__/comment.mock.js';
+import getComment from '../__mock__/comment.mock.js';
 
-it ('count the comments', () => {
+it('count the comments', () => {
   const comments = () => {
     getComment().then((data) => {
       expect(data.length).toBe(2);
@@ -9,10 +9,10 @@ it ('count the comments', () => {
   comments();
 });
 
-it ('test the username', () => {
+it('test the username', () => {
   const comments = () => {
     getComment().then((data) => {
-      expect(data[1].username).toBe("Maria");
+      expect(data[1].username).toBe('Maria');
     });
   };
   comments();

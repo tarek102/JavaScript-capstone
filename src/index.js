@@ -1,8 +1,7 @@
-import fetch from 'node-fetch';
-import '../src/style.css';
-import Api from './modules/Api';
-import { postComment, getComment } from './modules/comment';
-import allItemsCounter from './modules/allItemsCounter';
+import './style.css';
+import Api from './modules/api.js';
+import { postComment, getComment } from './modules/comment.js';
+import allItemsCounter from './modules/allItemsCounter.js';
 
 // Variables
 // const logo = document.querySelector('.logo');

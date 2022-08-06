@@ -5,27 +5,6 @@
     "at-rule-no-unknown": [
       true,
       {
-<<<<<<< HEAD
-        "ignoreAtRules": [
-          "tailwind",
-          "apply",
-          "variants",
-          "responsive",
-          "screen"
-        ]
-      }
-    ],
-    "scss/at-rule-no-unknown": [
-      true,
-      {
-        "ignoreAtRules": [
-          "tailwind",
-          "apply",
-          "variants",
-          "responsive",
-          "screen"
-        ]
-=======
         "ignoreAtRules": ["tailwind", "apply", "variants", "responsive", "screen"]
       }
     ],
@@ -33,15 +12,9 @@
       true,
       {
         "ignoreAtRules": ["tailwind", "apply", "variants", "responsive", "screen"]
->>>>>>> 832e69b08f86a7c94ebff5d7ee7037556369265d
       }
     ],
     "csstree/validator": true
   },
-<<<<<<< HEAD
-  "ignoreFiles": ["build/**", "dist/**", "**/reset*.css", "**/bootstrap*.css"]
-}
-=======
   "ignoreFiles": ["build/**", "dist/**", "**/reset*.css", "**/bootstrap*.css", "**/*.js", "**/*.jsx"]
 }
->>>>>>> 832e69b08f86a7c94ebff5d7ee7037556369265d

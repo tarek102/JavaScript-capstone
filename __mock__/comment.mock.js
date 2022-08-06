@@ -8,7 +8,7 @@ const getComment = () => Promise.resolve([
     comment: 'Good movie ',
     creation_date: '2022-08-06',
     username: 'Maria',
-  }
+  },
 ]);
 
-export {getComment}
+export default getComment;

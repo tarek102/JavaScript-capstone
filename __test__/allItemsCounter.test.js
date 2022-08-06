@@ -1,4 +1,4 @@
-import allItemsCounter from '../src/modules/allItemsCounter';
+import allItemsCounter from '../src/modules/allItemsCounter.js';
 
 describe('Items counter test', () => {
   document.body.innerHTML = `
