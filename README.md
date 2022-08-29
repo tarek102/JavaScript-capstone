@@ -3,7 +3,7 @@
 # JavaScript group project capstone (Movie web app)
 
 
-In this project we have created a tv list web app, that shows the ny=umber of the movies and displays info about the movie, you can like or add a comment to each movie. The app was built using 2 Apis, one is for the tv list and another one for the likes and comments.
+In this project we have created a tv list web app, that shows the number of movies and displays info about the movie, you can like or add a comment to each movie. The app was built using 2 Apis, one is for the tv list and another one for the likes and comments.
 
 ## Built With
 
